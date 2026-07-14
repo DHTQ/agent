@@ -1,0 +1,42 @@
+{
+  "source": {
+    "type": "windows_toast",
+    "apps": ["QQ", "微信", "WeChat"],
+    "exclude_apps": ["消息优先级助手"],
+    "poll_interval_seconds": 2.0,
+    "include_existing": false
+  },
+  "llm": {
+    "provider": "deepseek",
+    "model": "deepseek-v4-flash",
+    "api_key_env": "DEEPSEEK_API_KEY",
+    "base_url": "https://api.deepseek.com",
+    "instructions_path": "prompts/message_triage.md",
+    "context_messages": 8,
+    "timeout_seconds": 45,
+    "max_retries": 2
+  },
+  "user": {
+    "owner_name": "小李",
+    "role": "研发项目经理",
+    "timezone": "Asia/Shanghai",
+    "preferences": [
+      "生产故障和客户阻塞问题需要立即通知",
+      "普通群聊闲聊无需通知",
+      "涉及家人健康的消息至少标记为重要"
+    ],
+    "contacts": {
+      "王总": "直属负责人",
+      "张三": "当前项目的客户接口人",
+      "妈妈": "直系家人"
+    }
+  },
+  "notifications": {
+    "console_min_level": "medium",
+    "desktop_min_level": "high",
+    "desktop_enabled": true
+  },
+  "storage": {
+    "path": "data/messages.db"
+  }
+}

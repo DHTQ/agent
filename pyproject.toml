@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chat-priority-agent"
+version = "0.1.0"
+description = "Monitor chat notifications, assess importance, extract keywords, and notify by priority."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["openai>=1.68.0"]
+
+[project.optional-dependencies]
+windows = [
+  "winotify>=1.1.0",
+  "winrt-Windows.ApplicationModel>=2.1.0",
+  "winrt-Windows.UI.Notifications>=2.1.0",
+  "winrt-Windows.UI.Notifications.Management>=2.1.0",
+]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+chat-priority-agent = "chat_priority_agent.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["chat_priority_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
