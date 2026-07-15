@@ -11,7 +11,7 @@ from .analyzer import LLMMessageAnalyzer
 from .config import AgentConfig, load_config
 from .models import ChatMessage
 from .notifiers import NotificationRouter
-from .sources import StdinSource, WindowsToastSource
+from .sources import StdinSource, WindowsToastSource, WindowsUIANotificationSource
 from .storage import MessageStore
 
 
@@ -24,7 +24,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     run = subparsers.add_parser("run", help="持续监控消息")
     run.add_argument("--config", help="JSON 配置文件；默认读取当前目录 config.json")
-    run.add_argument("--source", choices=("windows_toast", "stdin"), help="覆盖配置中的消息源")
+    run.add_argument(
+        "--source",
+        choices=("windows_uia", "windows_toast", "stdin"),
+        help="覆盖配置中的消息源",
+    )
     run.add_argument("--json-output", action="store_true", help="控制台使用 JSON Lines 输出")
     run.add_argument("--verbose", action="store_true", help="输出调试日志")
 
@@ -39,6 +43,8 @@ def build_parser() -> argparse.ArgumentParser:
 def _source(config: AgentConfig):
     if config.source.type == "stdin":
         return StdinSource(default_app="stdin")
+    if config.source.type == "windows_uia":
+        return WindowsUIANotificationSource(config.source)
     if config.source.type == "windows_toast":
         return WindowsToastSource(config.source)
     raise ValueError(f"Unsupported source type: {config.source.type}")

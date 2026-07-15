@@ -1,9 +1,9 @@
 {
   "source": {
-    "type": "windows_toast",
+    "type": "windows_uia",
     "apps": ["QQ", "微信", "WeChat"],
     "exclude_apps": ["消息优先级助手"],
-    "poll_interval_seconds": 2.0,
+    "poll_interval_seconds": 0.5,
     "include_existing": false
   },
   "llm": {

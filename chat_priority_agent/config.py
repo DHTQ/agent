@@ -11,10 +11,10 @@ from .models import Importance
 
 @dataclass(slots=True)
 class SourceConfig:
-    type: str = "windows_toast"
+    type: str = "windows_uia"
     apps: list[str] = field(default_factory=lambda: ["QQ", "微信", "WeChat"])
     exclude_apps: list[str] = field(default_factory=lambda: ["消息优先级助手"])
-    poll_interval_seconds: float = 2.0
+    poll_interval_seconds: float = 0.5
     include_existing: bool = False
 
 

@@ -12,7 +12,9 @@ dependencies = ["openai>=1.68.0"]
 
 [project.optional-dependencies]
 windows = [
+  "uiautomation>=2.0.29",
   "winotify>=1.1.0",
+  "winrt-Windows.Foundation>=2.1.0",
   "winrt-Windows.ApplicationModel>=2.1.0",
   "winrt-Windows.UI.Notifications>=2.1.0",
   "winrt-Windows.UI.Notifications.Management>=2.1.0",
